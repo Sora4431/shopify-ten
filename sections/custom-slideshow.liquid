@@ -1,0 +1,217 @@
+{% if section.blocks.size > 0 %}
+    {%-liquid
+        assign autoplay = section.settings.autoplay
+        assign autoplaySpeed = section.settings.slideshow_speed
+        assign fade = section.settings.slideshow_transition
+        assign dots =  section.settings.dots
+       
+    -%}
+    
+    <section class="home-slideshow wow fadeInUp" id="slideshow-{{ section.id }}">
+      <div class="slideshow-item">
+        <div class="slideshow-banner">
+           <div class="slideshow">
+               
+            {% for block in section.blocks %}
+              <div class="item {% if forloop.first %}slide-active{% endif %}" id="block-{{block.id}}" data-index="{{ forloop.index }}">
+
+                    {% if block.type == 'image' %}
+                  {%- assign preview_img = block.settings.image_slide -%}
+                      <div class="images-contain">
+                          {% if block.settings.image_slide != blank %}
+                          {%- assign img_url = block.settings.image_slide | img_url: 'master' -%}
+                          <div class="adaptive_height {% if  block.settings.image_slide_mb != blank %}hidden-mb{% endif %}">
+                              <a href="{{ block.settings.link }}" class="slide-image">
+                                  <img src="{{ img_url }}" alt="{{ block.settings.image_slide.alt | default: shop.name }}" class="lazyload Slideshow__Image" data-sizes="auto">
+                              </a>
+                          </div>
+                          {% if  block.settings.image_slide_mb != blank %}
+                          {%- assign img_url_mb = block.settings.image_slide_mb | img_url: 'master' -%}
+                          <div class="adaptive_height hidden-pc">
+                            <a href="{{ block.settings.link }}" class="slide-image">
+                                <img src="{{ img_url_mb }}" alt="{{ block.settings.image_slide_mb.alt | default: shop.name }}" class="lazyload Slideshow__Image" data-sizes="auto">
+                            </a>
+                          </div>
+                          {% endif %}
+                          {% else %}
+  
+                          <div class="not_img {% if block.settings.image_slide_mb != blank %} slide-pc{% endif %}">
+                              1880 x 720px
+                          </div>
+                          {% endif %}
+  
+                          {% comment %}
+                          {% if block.settings.image_slide_mb != blank %}
+                          {%- assign preview_img_mb = block.settings.image_slide_mb -%}
+                          {%- assign img_url_mb = block.settings.image_slide_mb | img_url: 'master' -%}
+                          <div class="adaptive_height slide-mobile">
+                              <a href="{{ block.settings.link }}" class="slide-image">
+                                  <img src="{{ img_url_mb }}" alt="{{ block.settings.image_slide_mb.alt | default: shop.name }}" class="lazyload" data-sizes="auto">
+                              </a>
+                          </div>
+                          {% endif %}
+                          {% endcomment %}
+                      </div>
+                    {% else %}
+                      <div class="video_item {% if  block.settings.video_link_mb != blank %}hidden-mb{% endif %}">
+                        <video autoplay muted loop>
+                          <source src="{{ block.settings.video_link }}" type="video/mp4">
+                        </video>
+                      </div>
+                      {% if  block.settings.video_link_mb != blank %}
+                        <div class="video_item hidden-pc">
+                          <video autoplay muted loop>
+                            <source src="{{ block.settings.video_link_mb }}" type="video/mp4">
+                          </video>
+                        </div>
+                      {% endif %}
+                    {% endif %}
+                    <div class="c_slideshow__content">
+                      {% if block.settings.sub_title != blank %}
+                        <p>{{ block.settings.sub_title }}</p>
+                      {% endif %}
+                      {% if block.settings.title != blank %}
+                        <h3>{{ block.settings.title }}</h3>
+                      {% endif %}
+                      {% if block.settings.text_link != blank %}
+                        <a href="{{ block.settings.link }}" class="Button--custom">{{ block.settings.text_link }}</a>
+                      {% endif %}
+                    </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+    <style>
+      #slideshow-{{ section.id }} {
+        margin-bottom: {{ section.settings.margin_bottom | append: "px" }};
+      }
+      @media screen and (max-width: 640px) {
+        #slideshow-{{ section.id }} {
+          margin-bottom: {{ section.settings.margin_bottom_mb | append: "px" }};
+        }
+      }
+    </style>
+    <script type="text/javascript">
+      $(document).ready(function(){
+    
+        $('.slideshow').slick({
+          arrows: true,
+          infinite: true,
+          dots: true,
+          draggable: true,
+          focusOnSelect: true,
+          adaptiveHeight: true,
+          autoplay: {{ section.settings.autoplay }},
+          autoplaySpeed: 5000,
+          pauseOnHover: false,
+          pauseOnFocus: false,
+          outerEdgeLimit: true,
+          centerMode: true,
+          slidesToShow: 1,
+          centerPadding: '15.68%',
+          fade:false,
+          responsive: [
+            {
+              breakpoint: 767,
+              settings: {
+                centerPadding: '30px',
+                arrows: false
+              }
+            }
+          ]
+        });
+    
+        $('.slideshow').on('touchstart', e => {
+          $('.slideshow').slick('slickPlay');
+        });
+    
+        $('.slideshow').on( 'touchend touchcancel touchmove', function() { $(this).slick('slickPlay'); } );
+    
+        // End Slideshow progress
+      })
+    </script>
+    
+    
+    {% endif %}
+{% schema %}
+    {
+    "name": "SlideShow Custom",
+    "class": "home-slideshow-sections",
+    "max_blocks": 10,
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "autoplay",
+            "label": "Slideshow Auto Play",
+            "default": true
+        },
+        {
+          "type": "header",
+          "content": "Settings Layout"
+        },
+        {
+          "type": "number",
+          "id": "margin_bottom",
+          "label": "Margin bottom",
+          "default": 50
+        },
+        {
+          "type": "number",
+          "id": "margin_bottom_mb",
+          "label": "Margin bottom MB",
+          "default": 20
+        }
+    ],
+    "blocks" : [
+        {
+            "type": "image",
+            "name": "Image SlideShow",
+            "settings":[
+                {
+                    "type": "image_picker",
+                    "id": "image_slide",
+                    "label" : "Select Image"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "image_slide_mb",
+                    "label" : "Select Image mb"
+                },
+                {
+                    "type": "text",
+                    "id": "sub_title",
+                    "label" : "Sub title"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label" : "Title"
+                },
+                {
+                    "type": "text",
+                    "id": "text_link",
+                    "label" : "Text Button"
+                },
+                {
+                    "type" : "url",
+                    "id" : "link",
+                    "label" : "Slide link",
+                    "info": "====================="
+                }
+                
+            ]
+        }
+    ],
+    "presets": [{
+        "name": "Slideshow Custom",
+        "category": "Slideshow",
+        "blocks": [
+            {
+                "type": "image"
+            }
+        ]
+    }]
+    }
+{% endschema %}  

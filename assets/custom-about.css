@@ -1,0 +1,389 @@
+.sub-heading {
+    font-size: 14px;
+    line-height: 36px;
+    font-weight: 600;
+    letter-spacing: 0;
+    color: #CAA37C;
+}
+.heading-about {
+    font-size: 30px;
+    line-height: 52px;
+    letter-spacing: 0;
+    font-weight: 500;
+}
+.shopify-section--main-about-banner {
+    position: relative;
+    margin-bottom: 140px;
+}
+.shopify-section--main-about-banner .container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.supper__heading {
+    font-size: 187px;
+    line-height: 227px;
+    color: #fff;
+    font-family: var(--font-cormorant);
+    position: absolute;
+    z-index: -1;
+    top: 15%;
+    width: 100%;
+}
+.shopify-section--main-about-banner .page-header__text-wrapper {
+    position: relative;
+    max-width: 740px;
+    margin: 88px auto 45px;
+    padding: 118px 0 30px;
+}
+.shopify-section--main-about-banner .page-header__text-wrapper .heading {
+    padding: 0 20px;
+}
+.shopify-section--main-about-banner .page-header__text-wrapper .heading-about {
+    margin-top: 5px;
+    line-height: 30px;
+    font-weight: 500;
+}
+.shopify-section--main-about-banner .text-top {
+    font-size: 20px;
+    line-height: 40px;
+    margin-bottom: 10px;
+    padding-top: 27px;
+}
+.shopify-section--main-about-banner .text-bottom {
+    font-size: 14px;
+    line-height: 36px;
+    letter-spacing: 0;
+    margin-top: 15px;
+}
+.shopify-section--about-philosophy .philosophy-heading {
+    font-size: 28px;
+    line-height: 52px;
+    letter-spacing: 0;
+    font-weight: 300;
+    text-align: center;
+    margin: 0;
+}
+.shopify-section--about-philosophy .philosophy-heading.sub {
+    color: #CAA37C;
+}
+.philosophy-item {
+    background: rgba(202, 163, 124, 0.15);
+    display: flex;
+    margin: 80px 0 180px 80px;
+    padding-bottom: 80px;
+    position: relative;
+}
+.philosophy-item:nth-child(even) {
+    flex-direction: row-reverse;
+    margin: 180px 80px 180px 0;
+}
+.philosophy-item:nth-child(even) .block-image {
+    margin: -80px -80px 0 0;
+}
+.philosophy-item:nth-child(even) .block-sticky {
+    top: -10px;
+}
+.philosophy-item .block-image {
+    margin: -80px 0 0 -80px;
+    width: 750px;
+    z-index: 2;
+}
+.philosophy-item .block-title {
+    font-size: 22px;
+    line-height: 40px;
+    letter-spacing: 0;
+    font-weight: 300;
+    margin: 45px 0 30px;
+}
+.philosophy-item .block-des {
+    font-size: 14px;
+    line-height: 30px;
+    letter-spacing: 0;
+    margin-bottom: 0;
+}
+.philosophy-item .block-text {
+    padding: 0 100px;
+    margin-bottom: -10px;
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+}
+.philosophy-item .block-text .about-banner-image {
+    max-width: 71px;
+}
+.philosophy__container {
+    padding: 76px 90px;
+}
+.block-sticky {
+    color: #fff;
+    font-size: 147px;
+    line-height: 1;
+    letter-spacing: 0;
+    font-family: var(--font-cormorant);
+    position: absolute;
+    top: -15px;
+    margin-top: 0;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    right: -51px;
+    display: flex;
+    margin: 0;
+}
+
+.shopify-section--main-about-message .sub-heading {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 500;
+    letter-spacing: 0;
+    color: #CAA37C;
+    font-family: var(--font-cormorant);
+}
+.shopify-section--main-about-message .content-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    padding: 0 90px;
+}
+.message-item {
+    text-align: left;
+}
+.message-item .block-sub-title {
+    font-size: 14px;
+    line-height: 30px;
+    letter-spacing: 0;
+    margin: 3px 0;
+}
+.message-item .block-image {
+    margin-bottom: 27px;
+}
+.message-item .block-title {
+    font-size: 20px;
+    line-height: 30px;
+    letter-spacing: 0;
+    margin: 0;
+}
+.message-item .block-des {
+    font-size: 14px;
+    line-height: 30px;
+    letter-spacing: 0;
+    margin-top: 25px;
+}
+ .philosophy-item:last-child {
+    margin-bottom: 0;
+}
+ .shopify-section--main-about-message{
+  margin-bottom: 26px;
+  padding-bottom: 120px;
+  border-bottom: 1px solid #E5E5E5;
+}
+ .shopify-section--main-about-message .heading-about {
+    margin: 0;
+}
+ .shopify-section--main-about-message .page-header__text-wrapper {
+    margin: 59px auto 58px;
+}
+
+@media (max-width: 1500px) {
+    .philosophy-item .block-image {
+        width: 50%;
+    }
+    .philosophy-item .block-text {
+        padding-top: 70px;
+    }
+}
+@media screen and (max-width: 1400px) {
+    .philosophy-item .block-text {
+        padding: 0 90px 0 35px;
+    }
+}
+@media (max-width: 1199px) {
+    .philosophy-item,
+    .philosophy-item:nth-child(even) {
+        /* flex-direction: column; */
+        margin: 50px 0;
+    }
+    .philosophy-item .block-image,
+    .philosophy-item:nth-child(even) .block-image {
+        margin: 0;
+    }
+    .philosophy__container {
+        padding: 50px 0;
+    }
+    .shopify-section--main-about-message .content-container {
+        padding: 0;
+       gap: 42px;
+    }
+}
+@media (max-width: 1199px) {
+    .philosophy-item .block-text {
+        padding: 30px;
+    }
+    .philosophy-item {
+        padding-bottom: 30px;
+    }
+}
+@media(max-width: 999px){
+    .shopify-section--main-about-banner .content-container{
+        padding-left: calc(var(--container-gutter) - 10px);
+        padding-right: calc(var(--container-gutter) - 10px);
+        padding-top: 30px;
+        text-align: center;
+    }
+    .shopify-section--main-about-message .content-container{
+        gap: 30px;
+    }
+    .supper__heading {
+        font-size: 160px;
+    }
+}
+@media screen and (min-width: 768px) {
+    .shopify-section--about-philosophy .philosophy-heading.sub br {
+        display: none;
+    }
+}
+@media(max-width: 767px){
+    .shopify-section--main-about-message .content-container{
+        grid-template-columns: 1fr;
+        gap: 41px;
+    }
+    .block-sticky {
+        z-index: -1;
+        right: -37px;
+        font-size: 107px;
+    }
+    .shopify-section--about-philosophy .container {
+        padding: 13px 0 0;
+    }
+
+    .shopify-section--about-philosophy .container h2 {
+        padding: 0 var(--container-gutter);
+    }
+
+    .shopify-section--main-about-banner .page-header__text-wrapper{
+        margin: 0;
+        padding: 100px 0 0;
+    }
+    .supper__heading {
+        font-size: 90px;
+        line-height: 54px;
+        top: 41%;
+    }
+    .shopify-section--main-about-banner .page-header__text-wrapper .heading-about{
+        font-size: 20px;
+        line-height: 20px;
+    }
+    .sub-heading{
+        font-size: 11px;
+        line-height: 36px;
+    }
+    .shopify-section--main-about-banner .page-header__text-wrapper .heading{
+        bottom: 30px;
+        padding: 0;
+    }
+    .shopify-section--main-about-banner .text-top{
+        font-size: 14px;
+        line-height: 28px;
+        padding: 27px 10px 0;
+    }
+    .shopify-section--main-about-banner .text-bottom{
+        font-size: 12px;
+        line-height: 26px;
+        text-align: left;
+    }
+    .shopify-section--main-about-banner .text-bottom br{
+        display:none;
+    }
+    .shopify-section--main-about-banner{
+        margin-bottom: 50px;
+    }
+    .shopify-section--about-philosophy .philosophy-heading{
+        font-size: 18px;
+        line-height: 32px;
+    }
+    .philosophy__container{
+        padding: 33px 0;
+    }
+    .philosophy-item,  .philosophy-item:nth-child(even){
+        margin: 0 0 60px;
+        padding: 0;
+        background: transparent;
+        overflow: hidden;
+    }
+    .philosophy-item .block-text-banner-image{
+        max-width: 40px;
+    }
+    .philosophy-item .block-title{
+        font-size: 18px;
+        line-height: 30px;
+        margin: 29px 0 0;
+    }
+    .philosophy-item .block-des{
+        font-size: 12px;
+        line-height: 26px;
+        margin-top: 19px;
+    }
+    .philosophy-item .block-text{
+        padding: 20px;
+        margin-left: 30px;
+        padding: 50px 30px 51px 40px;
+        background: rgba(202,163,124,.15);
+        position: relative;
+        z-index: 1;
+        margin-bottom: 0;
+    }
+    .shopify-section--main-about-message .page-header__text-wrapper{
+        margin: 56px auto 23px;
+    }
+    .philosophy-item {
+        display: block;
+    }
+    .philosophy-item .block-image {
+        width: 100%;
+        position: relative;
+    }
+    .philosophy-item:nth-child(even) .block-text {
+        margin-left: 0;
+        margin-right: 30px;
+    }
+    .philosophy-item:nth-child(even) .block-des {
+        margin: 20px 0 0;
+    }
+    .message-item .block-image {
+        margin-bottom: 26px;
+    }
+    .shopify-section--main-about-message .heading-about{
+        font-size: 18px;        
+        line-height: 30px;
+    }
+    .shopify-section--main-about-message .sub-heading{
+        font-size: 13px;
+        line-height: 17px;
+    }
+    .message-item .block-sub-title{
+        font-size: 11px;
+       line-height: 13px;
+    }
+    .message-item .block-title{
+        font-size: 16px;
+        line-height: 30px;
+    }
+    .message-item .block-des{
+        font-size: 12px;
+        margin-top: 12px;
+        line-height: 26px;
+    }
+     .shopify-section--main-about-message{
+        padding-bottom: 61px;
+        margin-bottom: 24px;
+    }
+}
+@media(max-width: 515px){
+    .philosophy-item .block-text .about-banner-image{
+        max-height: 36px;
+        max-width: unset;
+        width: auto;
+    }
+}

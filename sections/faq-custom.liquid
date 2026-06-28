@@ -1,0 +1,177 @@
+{%- assign categories = section.blocks | where: 'type', 'category' -%}
+<section>
+  <div class="container">
+    <div class="page-header">
+      <nav
+        aria-label="{{ 'general.breadcrumb.title' | t }}"
+        class="breadcrumb breadcrumb--floating text--xsmall hidden-phone"
+      >
+        <ol class="breadcrumb__list" role="list">
+          <li class="breadcrumb__item">
+            <a class="breadcrumb__link" href="{{ routes.root_url }}">{{ 'general.breadcrumb.home' | t }}</a>
+          </li>
+
+          <li class="breadcrumb__item">
+            <span class="breadcrumb__link" aria-current="page">FAQ</span>
+          </li>
+        </ol>
+      </nav>
+
+      <div class="page-header__text-wrapper text-container">
+        <h1 class="heading h1">{{ page.title }}</h1>
+        {%- if section.settings.title != blank -%}
+          <span class="heading">{{ section.settings.title }}</span>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- unless template.suffix contains 'contact' or template.suffix contains 'faq' -%}
+      <div class="page-content page-content--{{ section.settings.page_width }} rte">
+        {{- page.content -}}
+      </div>
+    {%- endunless -%}
+  </div>
+</section>
+<section class="section section--faq_custom">
+  <div class="section__color-wrapper">
+    <div class="container">
+      <div class="">
+        <div class="faq-custom">
+          {%- if section.settings.show_navigation and categories.size > 0 -%}
+            <div class="faq-navigation-custom">
+              <ul class="faq--categories__list">
+                {%- for category in categories -%}
+                  <li class="faq--categories__item">
+                    <a
+                      class="faq--categories__anchor heading heading--small"
+                      href="#category-{{ section.id }}-{{ category.id }}"
+                      data-smooth-scroll
+                    >
+                      {{ category.settings.title }}
+                      <span class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="9.844" height="6.336" viewBox="0 0 9.844 6.336">
+                          <path id="Path_12012" data-name="Path 12012" d="M1300.633,424l4.215,4.215-4.215,4.215" transform="translate(433.137 -1299.926) rotate(90)" fill="none" stroke="#000" stroke-width="2"/>
+                        </svg>
+                      </span>
+                    </a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+
+          <div class="faq--custom__wrapper" itemscope itemtype="https://schema.org/FAQPage">
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                {%- when 'category' -%}
+                  <h2
+                    id="category-{{ section.id }}-{{ block.id }}"
+                    class="faq__category heading h6 anchor"
+                    {{ block.shopify_attributes }}
+                  >
+                    {{- block.settings.title | strip_html -}}
+                  </h2>
+
+                {%- when 'question' -%}
+                  <div class="faq__item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <button
+                      is="toggle-button"
+                      class="collapsible-toggle text--strong"
+                      aria-controls="block-{{ section.id }}-{{ block.id }}"
+                      aria-expanded="false"
+                      itemprop="name"
+                    >
+                      {{- block.settings.title -}}
+                      <span class="animated-plus"></span>
+                    </button>
+
+                    <collapsible-content
+                      id="block-{{ section.id }}-{{ block.id }}"
+                      class="collapsible anchor"
+                      itemscope
+                      itemprop="acceptedAnswer"
+                      itemtype="https://schema.org/Answer"
+                      {{ block.shopify_attributes }}
+                    >
+                      <div class="collapsible__content text-container" itemprop="text">
+                        {{ block.settings.answer }}
+                      </div>
+                    </collapsible-content>
+                  </div>
+              {%- endcase -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "class": "shopify-section--faq",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_navigation",
+      "label": "Show navigation",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "FAQ"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "rgba(0,0,0,0)"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "rgba(0,0,0,0)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Category"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Question",
+          "default": "About your shop"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Write content to help your customers to better understand your products or policies.</p>"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,48 @@
+{%- if template contains 'customers' or template contains 'index' -%}
+{%- else -%}
+  <nav aria-label="{{ 'general.breadcrumb.title' | t }}" class="breadcrumb text--xsmall hidden-pc">
+    <div class="container">
+      <ol class="breadcrumb__list" role="list">
+        <li class="breadcrumb__item">
+          <a class="breadcrumb__link" href="{{ routes.root_url }}">{{ 'general.breadcrumb.home' | t }}</a>
+        </li>
+
+        {%- if collection and template contains 'product' -%}
+          <li class="breadcrumb__item">
+            <a class="breadcrumb__link" href="{{ collection.url }}">{{- collection.title -}}</a>
+          </li>
+        {%- endif -%}
+
+        {%- if template contains 'article' -%}
+          <li class="breadcrumb__item">
+            <a class="breadcrumb__link" href="{{ blog.url }}">{{- blog.title -}}</a>
+          </li>
+        {%- endif -%}
+
+        <li class="breadcrumb__item">
+          <span class="breadcrumb__link" aria-current="page">
+            {%- if template contains 'collection' -%}
+              {%- if collection.handle == 'all' -%}
+                {{- 'collection.general.all_products' | t -}}
+              {%- else -%}
+                {{- collection.title -}}
+              {%- endif -%}
+            {%- elsif template contains 'product' -%}
+              {{ product.title | strip_html }}
+            {%- elsif template contains 'blog' -%}
+              {{ blog.title | strip_html }}
+            {%- elsif template contains 'article' -%}
+              {{ article.title | strip_html }}
+            {%- else -%}
+              {% if template.suffix == 'faq-custom' %}
+                Faq
+              {% else %}
+                {{ page.title | default: 'account' }}
+              {% endif %}
+            {%- endif -%}
+          </span>
+        </li>
+      </ol>
+    </div>
+  </nav>
+{%- endif -%}

@@ -1,0 +1,37 @@
+{%- capture product_tabs_nav_items -%}
+    <button type="button" class="tabs-nav__item heading heading--small" aria-expanded="true" aria-controls="product_tab1_{{ tab_device }}">
+    {{- 'product.general.description' | t -}}
+    </button>
+    <button type="button" class="tabs-nav__item heading heading--small" aria-expanded="false" aria-controls="product_tab2_{{ tab_device }}">
+        原料
+    </button>
+{%- endcapture -%}
+<div class="product-content__tabs tab--{{ tab_device }}">
+  <div class="product-tabs">
+    <tabs-nav arrows class="tabs-nav tabs-nav--loose">
+      <scrollable-content class="tabs-nav__scroller hide-scrollbar">
+        <div class="tabs-nav__scroller-inner">
+          <div class="tabs-nav__item-list">
+            {{- product_tabs_nav_items -}}
+          </div>
+        </div>
+      </scrollable-content>
+    </tabs-nav>
+    <div class="product-tabs__content">
+      <div id="product_tab1_{{ tab_device }}" class="product-tabs__tab-item-wrapper">
+        <collapsible-content open id="product_tab1-content" class="collapsible">
+          <div class="product-tabs__tab-item-content rte">
+            {{- product.description -}}
+          </div>
+        </collapsible-content>
+      </div>
+      <div hidden id="product_tab2_{{ tab_device }}" class="product-tabs__tab-item-wrapper">
+        <collapsible-content id="product_tab2-content" class="collapsible">
+          <div class="product-tabs__tab-item-content rte">
+            {{- product.metafields.custom.component -}}
+          </div>
+        </collapsible-content>
+      </div>
+    </div>
+  </div>
+</div>

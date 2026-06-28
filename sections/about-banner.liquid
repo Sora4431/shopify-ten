@@ -1,0 +1,97 @@
+<link rel="stylesheet" href="{{ 'custom-about.css' | asset_url }}">
+<section>
+  {%- if section.settings.image_bg != blank -%}
+    <img class="about-banner-image hidden-phone" loading="lazy" sizes="auto" {% render 'image-attributes', image: section.settings.image_bg, sizes: 'auto' %}>
+  {%- endif -%}
+   {%- if section.settings.image_bg_mb != blank -%}
+    <img class="about-banner-image hidden-tablet-and-up" loading="lazy" sizes="auto" {% render 'image-attributes', image: section.settings.image_bg_mb, sizes: 'auto' %}>
+  {% else %}
+      <img class="about-banner-image" loading="lazy" sizes="auto" {% render 'image-attributes', image: section.settings.image_bg, sizes: 'auto' %}>
+  {% endif %}
+  <div class="container">
+    <div class="page-header">   
+      <nav aria-label="{{ 'general.breadcrumb.title' | t }}" class="breadcrumb breadcrumb--floating text--xsmall hidden-phone">
+        <ol class="breadcrumb__list" role="list">
+          <li class="breadcrumb__item">
+            <a class="breadcrumb__link" href="{{ routes.root_url }}">{{ 'general.breadcrumb.home' | t }}</a>
+          </li>
+          <li class="breadcrumb__item">
+            <span class="breadcrumb__link" aria-current="page">{{ page.title }}</span>
+          </li>
+        </ol>
+      </nav>
+      <div class="page-header__text-wrapper text-container">
+        <div class="supper__heading">about us</div>
+        <div class="heading">
+            {% if section.settings.sub_heading != blank %}
+                <span class="sub-heading">{{ section.settings.sub_heading | upcase }}</span>
+            {% endif %}
+            {% if section.settings.sub_heading != blank %}
+                <h1 class="heading-about h2">{{ section.settings.heading}}</h1>         
+            {% endif %}
+        </div>
+      </div>
+        <div class="content-container">
+            {% if section.settings.content_top != blank %}
+                <p class="text-top">
+                   {{ section.settings.content_top}}
+                </p>
+            {% endif %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="6" viewBox="0 0 26 6">
+              <g transform="translate(-768 -578)">
+                <circle cx="3" cy="3" r="3" transform="translate(768 578)" fill="#caa37c"/>
+                <circle cx="3" cy="3" r="3" transform="translate(778 578)" fill="#caa37c"/>
+                <circle cx="3" cy="3" r="3" transform="translate(788 578)" fill="#caa37c"/>
+              </g>
+            </svg>
+            {% if section.settings.content_bottom != blank %}
+                <p class="text-bottom">
+                  {{ section.settings.content_bottom}}
+                </p>
+            {% endif %}
+        </div>
+    </div>
+  </div>          
+</section>
+{% schema %}
+{
+  "name": "Page About Banner",
+  "class": "shopify-section--main-about-banner",
+  "settings": [
+      {
+        "type": "header",
+        "content": "Banner"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_bg",
+        "label": "Image Banner"
+      },
+     {
+        "type": "image_picker",
+        "id": "image_bg_mb",
+        "label": "Image Banner Mobile"
+      },
+      {
+        "type": "text",
+        "id": "sub_heading",
+        "label": "Sub Heading"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading"
+      },
+      {
+        "type": "textarea",
+        "id": "content_top",
+        "label": "Text Top"
+      },
+      {
+        "type": "textarea",
+        "id": "content_bottom",
+        "label": "Text Bottom"
+      }   
+  ]
+}
+{% endschema %}

@@ -1,0 +1,68 @@
+{%- if blog.previous_article or blog.next_article -%}
+  <div class="container">
+    <div class="article__prev-next vertical-breather vertical-breather--tight {% if settings.background == settings.secondary_background %}vertical-breather--margin{% endif %}">
+      <header class="section__header text-container">
+        <h2 class="heading h3">{{ 'article.general.continue_reading' | t }}</h2>
+      </header>
+
+      <div class="scroller">
+        <div class="scroller__inner">
+          <article-list {% if settings.stagger_blog_posts_apparition %}stagger-apparition{% endif %} class="article-list">
+            {%- if blog.next_article -%}
+              <div {% if settings.stagger_blog_posts_apparition %}reveal{% endif %} class="article-item image-zoom">
+                <div class="article-item__content text-container">
+                  <div class="heading-blog text--small">前のニュース</div>
+                  <h3 class="article-item__title heading">
+                    <a href="{{ blog.next_article.url }}">{{ blog.next_article.title }}</a>
+                  </h3>
+              
+                  {%- if blog.next_article.excerpt != blank -%}
+                    <div class="article-item__excerpt text--small">
+                      {{- blog.next_article.excerpt -}}
+                    </div>
+                  {%- endif -%}
+                  <div class="article-item__date">
+                    {{- blog.next_article.published_at | date: "%Y.%m.%d" -}}
+                  </div>
+                </div>
+              </div>
+            {%- endif -%} 
+
+            {%- if blog.previous_article -%}
+              <div {% if settings.stagger_blog_posts_apparition %}reveal{% endif %} class="article-item image-zoom">
+                <div class="article-item__content text-container">
+                  <div class="heading-blog text--small">次のニュース</div>
+                  <h3 class="article-item__title heading">
+                    <a href="{{ blog.previous_article.url }}">{{ blog.previous_article.title }}</a>
+                  </h3>
+              
+                  {%- if blog.previous_article.excerpt != blank -%}
+                    <div class="article-item__excerpt text--small">
+                      {{- blog.previous_article.excerpt -}}
+                    </div>
+                  {%- endif -%}
+                  <div class="article-item__date"> 
+                    {{- blog.previous_article.published_at | date: "%Y.%m.%d" -}}
+                  </div>
+                </div> 
+              </div>
+            {%- endif -%}
+          </article-list>
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Blog post navigation",
+  "class": "shopify-section--blog-post-prev-next",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Previous and next article will be displayed (if they exists)."
+    }
+  ]
+}
+{% endschema %}

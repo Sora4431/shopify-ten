@@ -1,0 +1,108 @@
+<section class="Section" id="section-{{ section.id }}">
+    <div class="container">
+        <div class="wrapper-blog_section">
+            <div class="wrapper-blog_heading">
+                {%- if section.settings.sub_title != blank or section.settings.title != blank -%}
+                    <div class="section__header text-container">
+                        {%- if section.settings.sub_title != blank -%}
+                            <h2 class="heading heading--small">
+                                {{ section.settings.sub_title | escape }}
+                            </h2>
+                        {%- endif -%}
+                        {%- if section.settings.title != blank -%}
+                            <h3 class="heading h2">
+                                {{ section.settings.title | escape }}
+                            </h3>
+                        {%- endif -%}
+                    </div>
+                {%- endif -%}
+            </div>
+            <div class="wrapper-blog_inner">
+                <ul class="articles">
+                    {%- for item in blogs[section.settings.blog.handle].articles limit: 5-%}
+                        <li class="article-card">
+                            <span class="date">{{ item.published_at | date: "%Y.%m.%d" }}</span>
+                            <div class="article-item__tag">
+                              {{ item.tags.first }}
+                            </div>
+                            <a href="{{ item.url }}">{{ item.title }}</a>
+                        </li>
+                    {%- endfor -%}
+                </ul>
+            </div>
+        </div>
+        {% if section.settings.button != blank %}
+          <div class="showMore--btn">
+            <div class="button--custom">
+                <a href="{{ blogs[section.settings.blog.handle].url }}" class="">
+                    {{ section.settings.button | escape }}
+                    <span class="icon">
+                        {% render 'icon' with 'nav-arrow-right' %}
+                    </span>              
+                </a>
+            </div>
+          </div>
+        {% endif %}
+    </div>
+</section>
+<style>
+  #section-{{ section.id }} {
+    margin-bottom: {{ section.settings.margin_bottom | append: "px" }};
+  }
+  @media screen and (max-width: 640px) {
+    #section-{{ section.id }} {
+      margin-bottom: {{ section.settings.margin_bottom_mb | append: "px" }};
+    }
+  }
+</style>
+{% schema %}
+  {
+    "name": "Featured Blog",
+    "class": "shopify-section--bordered shopify-section-blog",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "ニュース"
+      },
+      {
+        "type": "text",
+        "id": "sub_title",
+        "label": "Sub Title",
+        "default": "News"
+      },
+      {
+        "type": "blog",
+        "id": "blog",
+        "label": "Blog"
+      },
+      {
+        "type": "text",
+        "id": "button",
+        "label": "Button text"
+      },
+      {
+        "type": "header",
+        "content": "Settings Layout"
+      },
+      {
+        "type": "number",
+        "id": "margin_bottom",
+        "label": "Margin bottom",
+        "default": 50
+      },
+      {
+        "type": "number",
+        "id": "margin_bottom_mb",
+        "label": "Margin bottom MB",
+        "default": 20
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured Blog"
+      }
+    ]
+  }
+{% endschema %}
